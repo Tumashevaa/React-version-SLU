@@ -29,6 +29,12 @@
   color: white;
 }
 
+.mosaic-img{
+  display: block;
+  width: 33.3333%;
+  height: auto;
+}
+
 .App-link {
   color: #61dafb;
 }

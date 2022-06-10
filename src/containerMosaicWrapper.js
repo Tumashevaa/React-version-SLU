@@ -1,11 +1,77 @@
+import { useState, useEffect } from 'react'
 
+function getAllPhotosData(page = 1) {
+
+    return fetch(`https://api.unsplash.com/photos/?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE&page=${page}`)
+        .then((response) => response.json())
+}
+
+function Counter() {
+    const [count, setCount] = useState(0)
+    return (
+        <div>
+            <h1>{count}</h1>
+
+            <button onClick = {() => {
+                setCount(count + 1)
+            }} >increment</button>
+
+            <button onClick = {() => {
+                setCount(count - 1)
+            }}>decrement</button>
+        </div>
+    )
+}
 
 function ContainerMosaicWrapper() {
+    const [items, setItems] = useState([])
+
+    const handleButtonClick = () => {
+        console.log('click')
+    }
+
+    useEffect(() => {
+        getAllPhotosData().then((data) => {
+            setItems(data)
+        })
+    }, [])
+
     return (
         <div className="container">
-            <div className="mosaic-wrapper" data-wrapper>
+            <Counter/>
+            <div className="mosaic-wrapper">
 
-                <div className="mosaic-col" data-col>
+                <div className="mosaic-col">
+                    {items.map((el, index) => {
+                        return (
+                            <div className="mosaic-item">
+                                <div className='additirial-info hide'>
+                                </div>
+                                <a href={el.urls.full} data-pswp-width={el.width} data-pswp-height={el.height} title="" target="_blank">
+                                    <img className="mosaic-img" src={el.urls.small_s3} alt=""/>
+                                </a>
+
+                                <div className="mosaic-infoTop mosaic-text">
+                                    <button className="btn-like" title="Like">
+                                       LIKE
+                                    </button>
+                                    
+                                    <div className='mosaic-likes'>💔 {el.likes}</div>
+                                </div> 
+
+                                <div className="mosaic-infoBottom mosaic-text">
+                                    <a className="avatar-name" href={`https://unsplash.com/@${el.user.username}`} target="_blank">
+                                        <img className='mosaic-avatar' title="" src={el.user.profile_image.large} alt="" />
+                                        {el.user.name}
+                                    </a>
+                                    <div>
+                                        <button className='btnItemById' title="Additirial info">Info</button>
+                                    </div>
+                                </div>
+                            </div>
+   
+                        )
+                    })}
                     {/* <!-- тут будет установлен контент через js -->  */}
                 </div>
 
@@ -20,7 +86,7 @@ function ContainerMosaicWrapper() {
             </div>
 
             <div className="container-btn">
-                <button data-btn></button>
+                <button onClick={handleButtonClick}>Показать еще</button>
             </div>
         </div>
     )
