@@ -1,49 +1,351 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-nav {
-    display: flex;
     flex-direction: row;
-    align-items: center;
     margin-right: 20px;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    
+    align-items: center;
+    background-color: #fff;
+    display: flex;
+    height: 62px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-  color: white;
+
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  box-shadow: 0 4px 12px #00000014, 0 0 1px #0100001a;
+  
 }
 
-.mosaic-img{
+.siteName {
+  font-size: 17px; 
+  font-weight: 500;
+}
+
+.space {
+  width:18px;
+}
+
+.container {
+  padding: 70px 60px 72px;
+}
+
+.mosaic-item {
+  position: relative;
+  margin-bottom: 24px;
+
+  font-size: 12px;
+  line-height: 1.1em;
+  color: #fff;
+}
+
+.mosaic-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+body {
+  margin: 0;
+
+  font-size: 12px;
+  color: #111;
+  line-height: 1.1;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+div {
   display: block;
-  width: 33.3333%;
+}
+
+.a2KGe {
+  align-items: center;
+  display: flex;
+  margin-top: -2px;
+  text-decoration: none;
+}
+
+.svg {
+  vertical-align: middle;
+}
+
+.container {
+  padding: 70px 60px 72px;
+}
+
+.user-info {
+  flex-direction: column;
+  width: 100%;
+  padding-left: 24px;
+  padding-bottom: 24px;
+  margin-right: 30px;
+  display: flex;
+}
+
+.container-avatar {
+  display: flex;
+  padding: 20px 0 0 100px;
+  padding-left: 24px;
+  padding-bottom: 24px;
+  margin-right: 30px;
+  display: flex;
+}
+
+.name {
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 6px;
+}
+
+.circle-avatar {
+  border-radius: 50%;
+}
+
+.info-img {
+  display: flex;
+  align-items: center;
+}
+
+.left {
+  padding-left: 20px;
+}
+
+.img1 {
+  width: 100%;
   height: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.hide {
+  display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.circle-color {
+  width: 17px; 
+  height: 17px;
+  border: 1px solid #000;
+  border-radius: 50%;
+}
+
+.mosaic-wrapper {
+  grid-column-gap: 24px;
+  align-items: start;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+}
+
+.mosaic-item {
+  width: 100%;
+  position: relative;
+  margin-bottom: 24px;
+
+  font-size: 12px;
+  line-height: 1.1em;
+  color: #fff;
+}
+
+.mosaic-item a { color: #fff; }
+
+.mosaic-img {
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+
+  transition: filter 0.5s ease;
+}
+
+.mosaic-item:hover .mosaic-img {
+  filter: brightness(0.8);
+}
+
+.mosaic-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.mosaic-text {
+  text-decoration: none;
+  text-shadow: 0 1px 8px #0000001a;
+  will-change: opacity;
+  font-weight: 400;
+  line-height: 1.35;
+
+  opacity: 0.9;
+  transition: opacity .1s ease-in-out;
+}
+
+.mosaic-infoTop {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 20px;
+}
+
+.mosaic-item:hover .mosaic-infoTop {
+  display: flex;
+}
+
+.mosaic-infoBottom {
+  display:none;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+
+  word-break: break-all;
+}
+
+.mosaic-item:hover .mosaic-infoBottom {
+  display: block;
+}
+
+.avatar-name {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
+}
+.container-btn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.btnItemById {
+  position: absolute;
+  left: auto;
+  right: 20px;
+  top: auto;
+  bottom: 20px;
+
+  font-size: 13px;
+  font-family: -apple-system,BlinkMacSystemFont,San Francisco,Helvetica Neue,Helvetica,Ubuntu,Roboto,Noto,Segoe UI,Arial,sans-serif;
+  background-color: #fff;
+  color: #767676;
+  fill: currentColor;
+  border: 1px solid #0000;
+  border-color: #d1d1d1;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px #0000000a;
+  height: 32px;
+  padding: 0 7px;
+}
+
+.btnItemById:hover{
+  color: #111;
+  border-color: #111;
+}
+
+.mosaic-col {
+
+}
+
+.hide {
+  display: none !important;
+}
+
+.additirial-info {
+  z-index: 1;
+  display: flex;
+  font-size: 12px;
+  line-height: 1.1em;
+  background-color: rgba(231 217 217 / 108.5%);
+  text-align: start;
+  
+  justify-content: center;
+  flex-direction: column;
+  color: black;
+
+  padding: 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.btnEsc {
+  position: absolute;
+  left: auto;
+  right: 20px;
+  top: auto;
+  bottom: 20px;
+
+  background-color: #fff;
+  color: #767676;
+  fill: currentColor;
+  border: 1px solid #0000;
+  border-color: #d1d1d1;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px #0000000a;
+  height: 32px;
+  padding: 0 7px;
+}
+
+.btnEsc:hover {
+  color: #111;
+  border-color: #111;
+}
+
+.btn-like {
+  background-color: #fff;
+  color: #767676;
+  fill: currentColor;
+  border: 1px solid #0000;
+  border-color: #d1d1d1;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px #0000000a;
+  height: 32px;
+  padding: 0 11px;
+}
+
+.btn-like:hover {
+  color: #111;
+  border-color:#111;
+}
+
+.btn-like:hover .svg-like {
+  fill: #111;
+}
+
+.on {
+  background-color:#e04c4c;
+  border-color: #e04c4c;
+}
+
+.on .svg-like {
+  fill: white;
+}
+
+.svg-like {
+  position: relative;
+  top: -1px;
+  width: 15px;
 }

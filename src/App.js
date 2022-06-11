@@ -8,16 +8,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Navigation siteName="Unssssssssplash!"/>
-        <ContainerMosaicWrapper />
-        <a
-          className="App-link"
-          href="https://unsplash.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Source
-        </a>
       </header>
+      <ContainerMosaicWrapper />
     </div>
   );
 }

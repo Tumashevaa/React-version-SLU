@@ -10,8 +10,6 @@ function Counter() {
     const [count, setCount] = useState(0)
     return (
         <div>
-            <h1>{count}</h1>
-
             <button onClick = {() => {
                 setCount(count + 1)
             }} >increment</button>
@@ -22,6 +20,28 @@ function Counter() {
         </div>
     )
 }
+
+// document.addEventListener('click', function(event) {
+//     const isLikeButton = event.target.closest('[data-like]') !== null
+//     if (isLikeButton) {
+//       const btnLikes = event.target.closest('[data-like]')
+//       const attributeLikesCount = btnLikes.getAttribute('data-like')
+//       const parentEl = btnLikes.parentElement
+//       const counterLikes = parentEl.querySelector('[data-mosaicLikes]')
+//       let newLikesCount = parseInt(attributeLikesCount, 10)
+  
+//       if (btnLikes.classList.contains('on')) {
+//         newLikesCount--
+//         btnLikes.classList.remove('on')
+//       } else {
+//         newLikesCount++
+//         btnLikes.classList.add('on')
+//       }
+      
+//       counterLikes.innerText = newLikesCount
+//       btnLikes.setAttribute('data-like', newLikesCount)
+//     }
+// })
 
 function ContainerMosaicWrapper() {
     const [items, setItems] = useState([])
