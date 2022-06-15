@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 
-function getPhotos(page) {
+const COLUMNS = 3
 
+function getPhotos(page) {
     return fetch(`https://api.unsplash.com/photos/?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE&page=${page}`)
         .then((response) => response.json())
 }
@@ -18,6 +19,29 @@ function Counter() {
             <button onClick = {() => {
                 setCount(count - 1)
             }}>decrement</button>
+        </div>
+    )
+}
+
+function MosaicItems({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic }) {
+    return (
+        <div className="mosaic-item">
+            <div className='additirial-info hide'>
+            </div>
+            <a href={imgFullUrl} data-pswp-width={imgWidth} data-pswp-height={imgHeight} title="" target="_blank" rel="noreferrer">
+                <img className="mosaic-img" src={imgSmallUrl} alt=""/>
+            </a>
+
+            <CounterLikes likes={likesCount}/>
+            <div className="mosaic-infoBottom mosaic-text">
+                <a className="avatar-name" href={`https://unsplash.com/@${userName}`} target="_blank" rel="noreferrer">
+                    <img className='mosaic-avatar' title="" src={userPic} alt="" />
+                    {userName}
+                </a>
+                <div>
+                    <button className='btnItemById' title="Additirial info">Info</button>
+                </div>
+            </div>
         </div>
     )
 }
@@ -49,10 +73,34 @@ function ContainerMosaicWrapper() {
         const newPage = page + 1
         setPage(newPage)
         getPhotos(newPage).then((nextData) => {
-            const currentData = [...items, ...nextData]
-            console.log(currentData)
-            setItems(currentData)
+            const newData = [...items, ...nextData]
+            console.log(newData)
+            setItems(newData)
         })
+    }
+
+    const columnsEls = [[], [], []]
+    const itemsPerColumn = Math.ceil(items.length / COLUMNS)
+
+    for (let col = 0; col < COLUMNS; col++) {
+        for (let i = 0; i < itemsPerColumn; i++) {
+            const el = items[i + col * itemsPerColumn]
+            if (el !== undefined ) {
+                columnsEls[col].push(
+                    <MosaicItems 
+                        key={`${el.id}_${i}`}
+                        imgFullUrl={el.urls.full}
+                        imgWidth={el.width}
+                        imgHeight={el.height}
+                        imgSmallUrl={el.urls.small_s3}
+                        likesCount={el.likes}
+                        userName={el.user.username}
+                        userPic={el.user.profile_image.large}
+                    />
+                ) 
+            } 
+          
+        }
     }
 
     return (
@@ -61,38 +109,15 @@ function ContainerMosaicWrapper() {
             <div className="mosaic-wrapper">
 
                 <div className="mosaic-col">
-                    {items.map((el, index) => {
-                        return (
-                            <div className="mosaic-item" key={el.id}>
-                                <div className='additirial-info hide'>
-                                </div>
-                                <a href={el.urls.full} data-pswp-width={el.width} data-pswp-height={el.height} title="" target="_blank">
-                                    <img className="mosaic-img" src={el.urls.small_s3} alt=""/>
-                                </a>
-
-                                <CounterLikes likes={el.likes}/>
-                                <div className="mosaic-infoBottom mosaic-text">
-                                    <a className="avatar-name" href={`https://unsplash.com/@${el.user.username}`} target="_blank">
-                                        <img className='mosaic-avatar' title="" src={el.user.profile_image.large} alt="" />
-                                        {el.user.name}
-                                    </a>
-                                    <div>
-                                        <button className='btnItemById' title="Additirial info">Info</button>
-                                    </div>
-                                </div>
-                            </div>
-   
-                        )
-                    })}
-                    {/* <!-- тут будет установлен контент через js -->  */}
+                    {columnsEls[0]}
                 </div>
 
-                <div className="mosaic-col" data-col>
-                    {/* <!-- тут будет установлен контент через js -->  */}
+                <div className="mosaic-col">
+                    {columnsEls[1]}
                 </div>
 
-                <div className="mosaic-col" data-col>
-                    {/* <!-- тут будет установлен контент через js -->  */}
+                <div className="mosaic-col">
+                    {columnsEls[2]}
                 </div>
 
             </div>
