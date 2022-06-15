@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function getAllPhotosData(page) {
+function getPhotos(page) {
 
     return fetch(`https://api.unsplash.com/photos/?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE&page=${page}`)
         .then((response) => response.json())
@@ -40,7 +40,7 @@ function ContainerMosaicWrapper() {
     const [page, setPage] = useState(1)
 
     useEffect(() => {
-        getAllPhotosData(page).then((data) => {
+        getPhotos(page).then((data) => {
             setItems(data)
         })
     }, [])
@@ -48,9 +48,10 @@ function ContainerMosaicWrapper() {
     const handleButtonClick = () => {
         const newPage = page + 1
         setPage(newPage)
-        getAllPhotosData(newPage).then((data) => {
-            console.log(data)
-            setItems(data)
+        getPhotos(newPage).then((nextData) => {
+            const currentData = [...items, ...nextData]
+            console.log(currentData)
+            setItems(currentData)
         })
     }
 
