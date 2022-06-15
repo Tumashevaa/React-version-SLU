@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function getAllPhotosData(page = 1) {
+function getAllPhotosData(page) {
 
     return fetch(`https://api.unsplash.com/photos/?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE&page=${page}`)
         .then((response) => response.json())
@@ -37,16 +37,22 @@ function CounterLikes(props) {
 
 function ContainerMosaicWrapper() {
     const [items, setItems] = useState([])
-
-    const handleButtonClick = () => {
-        console.log('click')
-    }
+    const [page, setPage] = useState(1)
 
     useEffect(() => {
-        getAllPhotosData().then((data) => {
+        getAllPhotosData(page).then((data) => {
             setItems(data)
         })
     }, [])
+
+    const handleButtonClick = () => {
+        const newPage = page + 1
+        setPage(newPage)
+        getAllPhotosData(newPage).then((data) => {
+            console.log(data)
+            setItems(data)
+        })
+    }
 
     return (
         <div className="container">
@@ -91,7 +97,7 @@ function ContainerMosaicWrapper() {
             </div>
 
             <div className="container-btn">
-                <button onClick={handleButtonClick}>Показать еще</button>
+                <button onClick={handleButtonClick}>Show more photos</button>
             </div>
         </div>
     )
