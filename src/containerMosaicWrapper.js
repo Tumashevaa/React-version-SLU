@@ -10,6 +10,7 @@ function Counter() {
     const [count, setCount] = useState(0)
     return (
         <div>
+            <p>{count}</p>
             <button onClick = {() => {
                 setCount(count + 1)
             }} >increment</button>
@@ -21,27 +22,18 @@ function Counter() {
     )
 }
 
-// document.addEventListener('click', function(event) {
-//     const isLikeButton = event.target.closest('[data-like]') !== null
-//     if (isLikeButton) {
-//       const btnLikes = event.target.closest('[data-like]')
-//       const attributeLikesCount = btnLikes.getAttribute('data-like')
-//       const parentEl = btnLikes.parentElement
-//       const counterLikes = parentEl.querySelector('[data-mosaicLikes]')
-//       let newLikesCount = parseInt(attributeLikesCount, 10)
-  
-//       if (btnLikes.classList.contains('on')) {
-//         newLikesCount--
-//         btnLikes.classList.remove('on')
-//       } else {
-//         newLikesCount++
-//         btnLikes.classList.add('on')
-//       }
-      
-//       counterLikes.innerText = newLikesCount
-//       btnLikes.setAttribute('data-like', newLikesCount)
-//     }
-// })
+function CounterLikes(props) {
+    const [likes, setCountLikes] = useState(props.likes)
+    return (
+        <div className="mosaic-infoTop mosaic-text">
+            <button className="btn-like" title="Like" onClick={() => {
+               setCountLikes(likes + 1) 
+            }}>LIKE
+            </button>
+            <div className='mosaic-likes'>💔 {likes}</div>
+        </div> 
+    )
+}
 
 function ContainerMosaicWrapper() {
     const [items, setItems] = useState([])
@@ -64,21 +56,14 @@ function ContainerMosaicWrapper() {
                 <div className="mosaic-col">
                     {items.map((el, index) => {
                         return (
-                            <div className="mosaic-item">
+                            <div className="mosaic-item" key={el.id}>
                                 <div className='additirial-info hide'>
                                 </div>
                                 <a href={el.urls.full} data-pswp-width={el.width} data-pswp-height={el.height} title="" target="_blank">
                                     <img className="mosaic-img" src={el.urls.small_s3} alt=""/>
                                 </a>
 
-                                <div className="mosaic-infoTop mosaic-text">
-                                    <button className="btn-like" title="Like">
-                                       LIKE
-                                    </button>
-                                    
-                                    <div className='mosaic-likes'>💔 {el.likes}</div>
-                                </div> 
-
+                                <CounterLikes likes={el.likes}/>
                                 <div className="mosaic-infoBottom mosaic-text">
                                     <a className="avatar-name" href={`https://unsplash.com/@${el.user.username}`} target="_blank">
                                         <img className='mosaic-avatar' title="" src={el.user.profile_image.large} alt="" />
