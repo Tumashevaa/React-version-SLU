@@ -7,6 +7,11 @@ function getPhotos(page) {
         .then((response) => response.json())
 }
 
+function getPhotosById(id) {
+    return fetch(`https://api.unsplash.com/photos/${id}?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE`)
+     .then((response) => response.json())
+   }
+
 function Counter() {
     const [count, setCount] = useState(0)
     return (
@@ -23,7 +28,56 @@ function Counter() {
     )
 }
 
-function MosaicItems({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic }) {
+// function DateStr({dateAt}) {
+//     return (
+//         <div>{dateAt}</div>
+//     )
+// }
+
+// function AdditionalInfo({id}) {
+//     const [info, setInfo] = useState([])
+//     useEffect(() => {
+//         getPhotosById(id).then((data) => {
+//             setInfo(data)
+//         })
+//     }, [])  
+    
+//     return (
+//         <DateStr dateAt={info.created_at}/>
+//     )
+// }
+
+
+
+function BtnInfo(id) {
+    const [modeBtn, setModeBtn] = useState(false)
+    const openInfo = () => {
+        setModeBtn(true)
+    }
+
+    function BtnEscFromAdditorialInfo() {
+        const closeInfo = () => {
+            setModeBtn(false)
+        }
+        return (
+            <button onClick={closeInfo} className='btnItemById'>Esc</button>
+        )
+    }
+
+    return (
+        <div>
+            { !modeBtn &&
+            <button onClick={openInfo} className='btnItemById' title="Additirial info">Info</button>
+            }
+            { modeBtn &&
+            <><div>Additional Info</div><BtnEscFromAdditorialInfo /></>
+            }
+        </div>
+    )
+}
+
+function MosaicItems({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic, id }) {
+
     return (
         <div className="mosaic-item">
             <div className='additirial-info hide'>
@@ -31,7 +85,7 @@ function MosaicItems({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount,
             <a href={imgFullUrl} data-pswp-width={imgWidth} data-pswp-height={imgHeight} title="" target="_blank" rel="noreferrer">
                 <img className="mosaic-img" src={imgSmallUrl} alt=""/>
             </a>
-
+            
             <CounterLikes likes={likesCount}/>
             <div className="mosaic-infoBottom mosaic-text">
                 <a className="avatar-name" href={`https://unsplash.com/@${userName}`} target="_blank" rel="noreferrer">
@@ -39,7 +93,7 @@ function MosaicItems({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount,
                     {userName}
                 </a>
                 <div>
-                    <button className='btnItemById' title="Additirial info">Info</button>
+                    <BtnInfo />
                 </div>
             </div>
         </div>
@@ -96,6 +150,7 @@ function ContainerMosaicWrapper() {
                         likesCount={el.likes}
                         userName={el.user.username}
                         userPic={el.user.profile_image.large}
+                        id={el.id}
                     />
                 ) 
             } 
