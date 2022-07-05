@@ -10,52 +10,51 @@ function getPhotos(page) {
 function getPhotosById(id) {
     return fetch(`https://api.unsplash.com/photos/${id}?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE`)
      .then((response) => response.json())
-   }
+}
 
-function Counter() {
-    const [count, setCount] = useState(0)
+function DateAt(props) {
+    const monthsMap = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const createdAt = new Date(props.createdAt)
+    const dateAt = createdAt.getDate()
+    const monthAt = createdAt.getMonth()
+    const yearAt = createdAt.getFullYear()
+    const hourAt = createdAt.getHours()
+    const minutesAt = createdAt.getMinutes()
+    if (props.createdAt) {
+        return (
+            <div>Date: {dateAt} {monthsMap[monthAt]} {yearAt} {hourAt}:{minutesAt}</div>
+        )
+    }
     return (
-        <div>
-            <p>{count}</p>
-            <button onClick = {() => {
-                setCount(count + 1)
-            }} >increment</button>
-
-            <button onClick = {() => {
-                setCount(count - 1)
-            }}>decrement</button>
-        </div>
+        <div>No info</div>
     )
 }
 
-// function DateStr({dateAt}) {
-//     return (
-//         <div>{dateAt}</div>
-//     )
+// const dateStr = data.created_at === null ? '' : formatDateTime(data.created_at)
+
+// TEST
+// const AdditionalInfo = (props) => {
+//     <div>
+//         {DateAt ? `${DateAt} createdAt={props.createdAt}` : ''}
+//     </div>
 // }
 
-// function AdditionalInfo({id}) {
-//     const [info, setInfo] = useState([])
-//     useEffect(() => {
-//         getPhotosById(id).then((data) => {
-//             setInfo(data)
-//         })
-//     }, [])  
-    
-//     return (
-//         <DateStr dateAt={info.created_at}/>
-//     )
-// }
+function AdditionalInfo(props) {
+    return <DateAt createdAt={props.createdAt}/>
+}
 
-
-
-function BtnInfo(id) {
+function BtnInAdditionalInfo(props) {
     const [modeBtn, setModeBtn] = useState(false)
+    const [data, setData] = useState({})
     const openInfo = () => {
         setModeBtn(true)
+        getPhotosById(props.id).then((data) => {
+            console.log(data)
+            setData(data)
+        }) 
     }
 
-    function BtnEscFromAdditorialInfo() {
+    function BtnEscFromAddionalInfo() {
         const closeInfo = () => {
             setModeBtn(false)
         }
@@ -70,7 +69,7 @@ function BtnInfo(id) {
             <button onClick={openInfo} className='btnItemById' title="Additirial info">Info</button>
             }
             { modeBtn &&
-            <><div>Additional Info</div><BtnEscFromAdditorialInfo /></>
+            <><AdditionalInfo createdAt={data.created_at}/><BtnEscFromAddionalInfo /></>
             }
         </div>
     )
@@ -93,7 +92,7 @@ function MosaicItems({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount,
                     {userName}
                 </a>
                 <div>
-                    <BtnInfo />
+                    <BtnInAdditionalInfo id={id} />
                 </div>
             </div>
         </div>
@@ -160,7 +159,6 @@ function ContainerMosaicWrapper() {
 
     return (
         <div className="container">
-            <Counter/>
             <div className="mosaic-wrapper">
 
                 <div className="mosaic-col">
