@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const COLUMNS = 3
 
@@ -20,56 +20,60 @@ function DateAt(props) {
     const yearAt = createdAt.getFullYear()
     const hourAt = createdAt.getHours()
     const minutesAt = createdAt.getMinutes()
-    if (props.createdAt) {
-        return (
-            <div>Date: {dateAt} {monthsMap[monthAt]} {yearAt} {hourAt}:{minutesAt}</div>
-        )
-    }
-    return (
-        <div>No info</div>
-    )
+    return <div>Date: {dateAt} {monthsMap[monthAt]} {yearAt} {hourAt}:{minutesAt}</div>
 }
 
-// const dateStr = data.created_at === null ? '' : formatDateTime(data.created_at)
-
-// TEST
-// const AdditionalInfo = (props) => {
-//     <div>
-//         {DateAt ? `${DateAt} createdAt={props.createdAt}` : ''}
-//     </div>
-// }
+function CameraName(props) {
+    // const cameraName = data.exif.name === null ? '' : `<div>Camera: ${data.exif.name}</div>`
+    if (props.cameraName) {
+        return <div>Camera: {props.cameraName}</div>
+    }
+    return <div>No info</div>
+}
 
 function AdditionalInfo(props) {
-    return <DateAt createdAt={props.createdAt}/>
+    return (
+        <div>
+            <DateAt createdAt={props.createdAt}/>
+            <CameraName cameraName={props.cameraName}/>
+        </div>
+    )
 }
 
 function BtnInAdditionalInfo(props) {
     const [modeBtn, setModeBtn] = useState(false)
     const [data, setData] = useState({})
+    const [isInfoLoading, setInfoLoading] = useState(false)
+
     const openInfo = () => {
-        setModeBtn(true)
+        setInfoLoading(true)
         getPhotosById(props.id).then((data) => {
             console.log(data)
             setData(data)
+            setModeBtn(true)
+            setInfoLoading(false)
         }) 
-    }
-
-    function BtnEscFromAddionalInfo() {
-        const closeInfo = () => {
-            setModeBtn(false)
-        }
-        return (
-            <button onClick={closeInfo} className='btnItemById'>Esc</button>
-        )
     }
 
     return (
         <div>
             { !modeBtn &&
-            <button onClick={openInfo} className='btnItemById' title="Additirial info">Info</button>
+                <button
+                    onClick={openInfo}
+                    disabled={isInfoLoading}
+                    className='btnItemById'
+                    title="Additirial info"
+                >
+                    {isInfoLoading ? 'Loading' : 'Info' }
+                </button>
             }
             { modeBtn &&
-            <><AdditionalInfo createdAt={data.created_at}/><BtnEscFromAddionalInfo /></>
+                <React.Fragment>
+                    <AdditionalInfo 
+                        createdAt={data.created_at}
+                        cameraName={data.exif.make}
+                    /><button onClick={() => setModeBtn(false)} className='btnItemById'>Esc</button>
+                </React.Fragment>
             }
         </div>
     )
@@ -150,6 +154,8 @@ function ContainerMosaicWrapper() {
                         userName={el.user.username}
                         userPic={el.user.profile_image.large}
                         id={el.id}
+                        // createdAt={el.created_at}
+                        // cameraName={el.exif.name}
                     />
                 ) 
             } 
