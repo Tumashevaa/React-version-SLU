@@ -12,46 +12,44 @@ function getPhotosById(id) {
      .then((response) => response.json())
 }
 
-function DateAt(props) {
+// function dateSTR() {
+    // const monthsMap = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+//     const createdAt = new Date(props.createdAt)
+//     const dateAt = createdAt.getDate()
+//     const monthAt = createdAt.getMonth()
+//     const yearAt = createdAt.getFullYear()
+//     const hourAt = createdAt.getHours()
+//     const minutesAt = createdAt.getMinutes()
+//     return 'Date AT:' {dateAt} {monthsMap[monthAt]} {yearAt} {hourAt}{minutesAt}
+// }
+
+function formatDateTime(dateCreatedAt) {
     const monthsMap = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    const createdAt = new Date(props.createdAt)
+    const createdAt = new Date(dateCreatedAt)
     const dateAt = createdAt.getDate()
     const monthAt = createdAt.getMonth()
     const yearAt = createdAt.getFullYear()
     const hourAt = createdAt.getHours()
     const minutesAt = createdAt.getMinutes()
-    return <div>Date: {dateAt} {monthsMap[monthAt]} {yearAt} {hourAt}:{minutesAt}</div>
+    return `${dateAt} ${monthsMap[monthAt]} ${yearAt} ${hourAt}:${minutesAt}`
 }
 
-function CameraName(props) {
-    // const cameraName = data.exif.name === null ? '' : `<div>Camera: ${data.exif.name}</div>`
-    if (props.cameraName) {
-        return <div>Camera: {props.cameraName}</div>
+function GetObjectPropertyValues({label, way}) {
+    if (way) {
+        return (
+            <div>{label}: {way}</div>
+        )
     }
-    return null;
-}
-
-function ISO(props) {
-    if (props.iso) {
-        return <div>ISO: {props.iso}</div>
-    }
-    return null
-}
-
-function Aperture(props) {
-    if (props.aperture) {
-        return <div>Aperture: {props.aperture}</div>
-    }
-    return null
+    return null 
 }
 
 function AdditionalInfo(props) {
     return (
         <div>
-            <DateAt createdAt={props.createdAt}/>
-            <CameraName cameraName={props.cameraName}/>
-            <ISO iso={props.iso}/>
-            <Aperture aperture={props.aperture}/>
+            <GetObjectPropertyValues label={props.title} way={formatDateTime(props.dateCreatedAt)}/>
+            <GetObjectPropertyValues label={props.title} way={props.cameraName}/>
+            <GetObjectPropertyValues label={props.title} way={props.iso}/>
+            <GetObjectPropertyValues label={props.title} way={props.aperture}/>
         </div>
     )
 }
@@ -85,12 +83,11 @@ function BtnInAdditionalInfo(props) {
             }
             { modeBtn &&
                 <React.Fragment>
-                    <AdditionalInfo 
-                        createdAt={data.created_at}
-                        cameraName={data.exif.make}
-                        iso={data.exif.iso}
-                        aperture={data.exif.aperture}
-                    /><button onClick={() => setModeBtn(false)} className='btnItemById'>Esc</button>
+                    <AdditionalInfo title={'Date'} dateCreatedAt={data.created_at}/>
+                    <AdditionalInfo title={'Camera'} cameraName={data.exif.make}/>
+                    <AdditionalInfo title={'ISO'} iso={data.exif.iso} />
+                    <AdditionalInfo title={'Aperture'} aperture={data.exif.aperture}/>
+                    <button onClick={() => setModeBtn(false)} className='btnItemById'>Esc</button>
                 </React.Fragment>
             }
         </div>
@@ -172,8 +169,6 @@ function ContainerMosaicWrapper() {
                         userName={el.user.username}
                         userPic={el.user.profile_image.large}
                         id={el.id}
-                        // createdAt={el.created_at}
-                        // cameraName={el.exif.name}
                     />
                 ) 
             } 
