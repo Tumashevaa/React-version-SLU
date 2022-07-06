@@ -28,7 +28,21 @@ function CameraName(props) {
     if (props.cameraName) {
         return <div>Camera: {props.cameraName}</div>
     }
-    return <div>No info</div>
+    return null;
+}
+
+function ISO(props) {
+    if (props.iso) {
+        return <div>ISO: {props.iso}</div>
+    }
+    return null
+}
+
+function Aperture(props) {
+    if (props.aperture) {
+        return <div>Aperture: {props.aperture}</div>
+    }
+    return null
 }
 
 function AdditionalInfo(props) {
@@ -36,6 +50,8 @@ function AdditionalInfo(props) {
         <div>
             <DateAt createdAt={props.createdAt}/>
             <CameraName cameraName={props.cameraName}/>
+            <ISO iso={props.iso}/>
+            <Aperture aperture={props.aperture}/>
         </div>
     )
 }
@@ -72,6 +88,8 @@ function BtnInAdditionalInfo(props) {
                     <AdditionalInfo 
                         createdAt={data.created_at}
                         cameraName={data.exif.make}
+                        iso={data.exif.iso}
+                        aperture={data.exif.aperture}
                     /><button onClick={() => setModeBtn(false)} className='btnItemById'>Esc</button>
                 </React.Fragment>
             }
