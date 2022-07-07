@@ -43,17 +43,6 @@ function GetObjectPropertyValues({label, way}) {
     return null 
 }
 
-function AdditionalInfo(props) {
-    return (
-        <div>
-            <GetObjectPropertyValues label={props.title} way={formatDateTime(props.dateCreatedAt)}/>
-            <GetObjectPropertyValues label={props.title} way={props.cameraName}/>
-            <GetObjectPropertyValues label={props.title} way={props.iso}/>
-            <GetObjectPropertyValues label={props.title} way={props.aperture}/>
-        </div>
-    )
-}
-
 function BtnInAdditionalInfo(props) {
     const [modeBtn, setModeBtn] = useState(false)
     const [data, setData] = useState({})
@@ -83,10 +72,14 @@ function BtnInAdditionalInfo(props) {
             }
             { modeBtn &&
                 <React.Fragment>
-                    <AdditionalInfo title={'Date'} dateCreatedAt={data.created_at}/>
-                    <AdditionalInfo title={'Camera'} cameraName={data.exif.make}/>
-                    <AdditionalInfo title={'ISO'} iso={data.exif.iso} />
-                    <AdditionalInfo title={'Aperture'} aperture={data.exif.aperture}/>
+                    <GetObjectPropertyValues label="Date" way={formatDateTime(data.created_at)}/>
+                    <GetObjectPropertyValues label="Camera" way={data.exif.make}/>
+                    <GetObjectPropertyValues label="ISO" way={data.exif.iso}/>
+                    <GetObjectPropertyValues label="Aperture" way={data.exif.aperture}/>
+                    <GetObjectPropertyValues label="Exposure time" way={data.exif.exposure_time}/>
+                    <GetObjectPropertyValues label="Focal length" way={data.exif.focal_length}/>
+                    <GetObjectPropertyValues label="Country" way={data.location.country}/>
+                    <GetObjectPropertyValues label="City" way={data.location.city}/>
                     <button onClick={() => setModeBtn(false)} className='btnItemById'>Esc</button>
                 </React.Fragment>
             }
