@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import BtnInAdditionalInfo from './BtnInAdditionalInfowithLogics'
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 
 const COLUMNS = 3
 
@@ -8,13 +10,26 @@ function getPhotos(page) {
         .then((response) => response.json())
 }
 
-function MosaicItems({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic, id }) {
+function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic, id }) {
+    useEffect(() => {
+        let lightbox = new PhotoSwipeLightbox({
+            gallery: '[data-wrapper]',
+            children: '[data-img]',
+            pswpModule: () => import('photoswipe'),
+        });
+        lightbox.init();
+
+        return () => {
+            lightbox.destroy();
+            lightbox = null;
+        };
+    }, []);
 
     return (
         <div className="mosaic-item">
             <div className='additirial-info hide'>
             </div>
-            <a href={imgFullUrl} data-pswp-width={imgWidth} data-pswp-height={imgHeight} title="" target="_blank" rel="noreferrer">
+            <a data-img href={imgFullUrl} data-pswp-width={imgWidth} data-pswp-height={imgHeight} title="" target="_blank" rel="noreferrer">
                 <img className="mosaic-img" src={imgSmallUrl} alt=""/>
             </a>
             
@@ -73,7 +88,7 @@ function ContainerMosaicWrapper() {
             const el = items[i + col * itemsPerColumn]
             if (el !== undefined ) {
                 columnsEls[col].push(
-                    <MosaicItems 
+                    <MosaicItem 
                         key={`${el.id}_${i}`}
                         imgFullUrl={el.urls.full}
                         imgWidth={el.width}
@@ -91,7 +106,7 @@ function ContainerMosaicWrapper() {
     }
 
     return (
-        <div className="container">
+        <div className="container" data-wrapper>
             <div className="mosaic-wrapper">
 
                 <div className="mosaic-col">
