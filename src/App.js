@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Navigation from './nav.js'
 import ContainerMosaicWrapper from './containerMosaicWrapper'

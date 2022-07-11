@@ -33,7 +33,6 @@ function BtnInAdditionalInfo(props) {
     const openInfo = () => {
         setInfoLoading(true)
         getPhotosById(props.id).then((data) => {
-            console.log(data)
             setData(data)
             setModeBtn(true)
             setInfoLoading(false)

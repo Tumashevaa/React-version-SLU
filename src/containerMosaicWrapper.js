@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import BtnInAdditionalInfo from './BtnInAdditionalInfowithLogics'
+import BtnInAdditionalInfo from './AdditionalInfo'
+import CounterLikes from './counterLikes.js'
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
 
@@ -44,19 +45,6 @@ function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, 
                 </div>
             </div>
         </div>
-    )
-}
-
-function CounterLikes(props) {
-    const [likes, setCountLikes] = useState(props.likes)
-    return (
-        <div className="mosaic-infoTop mosaic-text">
-            <button className="btn-like" title="Like" onClick={() => {
-               setCountLikes(likes + 1) 
-            }}>LIKE
-            </button>
-            <div className='mosaic-likes'>💔 {likes}</div>
-        </div> 
     )
 }
 
@@ -109,15 +97,15 @@ function ContainerMosaicWrapper() {
         <div className="container" data-wrapper>
             <div className="mosaic-wrapper">
 
-                <div className="mosaic-col">
+                <div>
                     {columnsEls[0]}
                 </div>
 
-                <div className="mosaic-col">
+                <div>
                     {columnsEls[1]}
                 </div>
 
-                <div className="mosaic-col">
+                <div>
                     {columnsEls[2]}
                 </div>
 
