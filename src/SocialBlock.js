@@ -1,4 +1,4 @@
-function SocialBlock({userInsta, userTwitter}) {
+function SocialBlock({userInsta, userTwitter, urlPortfolio}) {
     return (
         <div>
             <div>
@@ -11,13 +11,12 @@ function SocialBlock({userInsta, userTwitter}) {
                 <a href={userTwitter ? `https://twitter.com/@${userTwitter}` : ''} target="_blank" rel="noreferrer">
                 {userTwitter ? userTwitter : ''}</a>
             </div>
+            <div>
+                {urlPortfolio ? 'Portfolio: ' : ''}
+                <a href={urlPortfolio} target="_blank" rel="noreferrer">{urlPortfolio}</a>
+            </div>
         </div>
     )
 }
-
-// const portfolioHtml = createStringForSocialBlocks(
-    //     'Portfolio',
-    //     props.user.portfolio_url
-    // )
 
 export default SocialBlock

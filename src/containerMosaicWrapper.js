@@ -13,7 +13,7 @@ function getPhotos(page) {
         .then((response) => response.json())
 }
 
-function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic, id, description, bioHtml, userInsta, userTwitter}) {
+function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic, id, description, bioHtml, userInsta, userTwitter, urlPortfolio}) {
     useEffect(() => {
         let lightbox = new PhotoSwipeLightbox({
             gallery: '[data-wrapper]',
@@ -42,7 +42,7 @@ function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, 
                     <img className='mosaic-avatar' title={bioHtml} src={userPic} alt="" />
                     {userName}
                 </a>
-               <SocialBlock userInsta={userInsta} userTwitter={userTwitter}/>
+               <SocialBlock userInsta={userInsta} userTwitter={userTwitter} urlPortfolio={urlPortfolio}/>
                 
                 <div>
                     <BtnInAdditionalInfo id={id} />
@@ -95,6 +95,7 @@ function ContainerMosaicWrapper() {
                         bioHtml={el.bioHtml}
                         userInsta={el.user.social.instagram_username}
                         userTwitter={el.user.social.twitter_username}
+                        urlPortfolio={el.user.portfolio_url}
                     />
                 ) 
             } 
