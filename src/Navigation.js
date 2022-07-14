@@ -1,4 +1,6 @@
 import LogoSvg from './logo.jsx'
+import './Navigation.css';
+
 // import { slide as Menu } from 'react-burger-menu'
 // import React, { useState } from 'react'
 
@@ -22,7 +24,7 @@ import LogoSvg from './logo.jsx'
 
 function Navigation(props) {
   return (
-    <header className="header">
+    <header className="App-header">
       <nav className='App-nav'>
         <LogoSvg />
         <div className="space"></div>

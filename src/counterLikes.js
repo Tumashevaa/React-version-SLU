@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './CounterLikes.css'
 
 function SvgLike() {
     return (
@@ -34,7 +35,7 @@ function CounterLikes(props) {
                     setLikesCount(isLiked ? likesCount - 1 : likesCount + 1)
                 }}
             />
-            <div className='mosaic-likes'>💔 {likesCount}</div>
+            <div>💔 {likesCount}</div>
         </div>
     )
 }

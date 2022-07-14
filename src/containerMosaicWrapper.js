@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import BtnInAdditionalInfo from './AdditionalInfo'
-import CounterLikes from './counterLikes.js'
+import BtnInAdditionalInfo from './AdditionalInfo.js'
+import CounterLikes from './CounterLikes.js'
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
+import './ContainerMosaicWrapper.css'
+import SocialBlock from './SocialBlock.js'
 
 const COLUMNS = 3
 
@@ -11,7 +13,7 @@ function getPhotos(page) {
         .then((response) => response.json())
 }
 
-function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic, id }) {
+function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, userName, userPic, id, description, bioHtml, userInsta, userTwitter}) {
     useEffect(() => {
         let lightbox = new PhotoSwipeLightbox({
             gallery: '[data-wrapper]',
@@ -30,16 +32,18 @@ function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, 
         <div className="mosaic-item">
             <div className='additirial-info hide'>
             </div>
-            <a data-img href={imgFullUrl} data-pswp-width={imgWidth} data-pswp-height={imgHeight} title="" target="_blank" rel="noreferrer">
+            <a data-img href={imgFullUrl} data-pswp-width={imgWidth} data-pswp-height={imgHeight} title={description} target="_blank" rel="noreferrer">
                 <img className="mosaic-img" src={imgSmallUrl} alt=""/>
             </a>
             
             <CounterLikes likes={likesCount}/>
             <div className="mosaic-infoBottom mosaic-text">
                 <a className="avatar-name" href={`https://unsplash.com/@${userName}`} target="_blank" rel="noreferrer">
-                    <img className='mosaic-avatar' title="" src={userPic} alt="" />
+                    <img className='mosaic-avatar' title={bioHtml} src={userPic} alt="" />
                     {userName}
                 </a>
+               <SocialBlock userInsta={userInsta} userTwitter={userTwitter}/>
+                
                 <div>
                     <BtnInAdditionalInfo id={id} />
                 </div>
@@ -54,6 +58,7 @@ function ContainerMosaicWrapper() {
 
     useEffect(() => {
         getPhotos(page).then((data) => {
+            console.log(data)
             setItems(data)
         })
     }, [])
@@ -83,9 +88,13 @@ function ContainerMosaicWrapper() {
                         imgHeight={el.height}
                         imgSmallUrl={el.urls.small_s3}
                         likesCount={el.likes}
-                        userName={el.user.username}
+                        userName={el.user.name}
                         userPic={el.user.profile_image.large}
                         id={el.id}
+                        description={el.description}
+                        bioHtml={el.bioHtml}
+                        userInsta={el.user.social.instagram_username}
+                        userTwitter={el.user.social.twitter_username}
                     />
                 ) 
             } 

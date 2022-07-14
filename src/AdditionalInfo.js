@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './AdditionalInfo.css'
 
 function getPhotosById(id) {
     return fetch(`https://api.unsplash.com/photos/${id}?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE`)
@@ -19,7 +20,7 @@ function formatDateTime(dateCreatedAt) {
 function GetObjectPropertyValues({label, way}) {
     if (way) {
         return (
-            <div>{label}: {way}</div>
+            <div  className='additionalInfo'>{label}: {way}</div>
         )
     }
     return null 

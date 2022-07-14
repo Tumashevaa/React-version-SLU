@@ -1,0 +1,32 @@
+.App-header {
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+  
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    box-shadow: 0 4px 12px #00000014, 0 0 1px #0100001a;
+}
+
+.App-nav {
+    flex-direction: row;
+    margin-right: 20px;
+    
+    align-items: center;
+    background-color: #fff;
+    display: flex;
+    height: 62px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.siteName {
+    font-size: 17px; 
+    font-weight: 500;
+}
+  
+.space {
+    width:18px;
+}
+

@@ -1,13 +1,11 @@
 import './App.css';
-import Navigation from './nav.js'
-import ContainerMosaicWrapper from './containerMosaicWrapper'
+import Navigation from './Navigation'
+import ContainerMosaicWrapper from './ContainerMosaicWrapper'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
         <Navigation siteName="Unssssssssplash!"/>
-      </header>
       <ContainerMosaicWrapper />
     </div>
   );
