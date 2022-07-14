@@ -1,20 +1,32 @@
 function SocialBlock({userInsta, userTwitter, urlPortfolio}) {
     return (
         <div>
-            <div>
-                {userInsta ? 'Instagram: ' : ''}
-                <a href={userInsta ? `https://instagram.com/@${userInsta}` : ''} target="_blank" rel="noreferrer">
-                {userInsta ? userInsta : ''}</a>
-            </div>
-            <div>
-                {userTwitter ? 'Twitter: ' : ''}
-                <a href={userTwitter ? `https://twitter.com/@${userTwitter}` : ''} target="_blank" rel="noreferrer">
-                {userTwitter ? userTwitter : ''}</a>
-            </div>
-            <div>
-                {urlPortfolio ? 'Portfolio: ' : ''}
-                <a href={urlPortfolio} target="_blank" rel="noreferrer">{urlPortfolio}</a>
-            </div>
+            {userInsta && (
+                <div>
+                    Instagram:{' '}
+                    <a href={`https://instagram.com/@${userInsta}`} target="_blank" rel="noreferrer">
+                        {userInsta}
+                    </a>
+                </div>  
+            )}
+            
+            {userTwitter && (
+                <div>
+                    Twitter:{' '}
+                    <a href={`https://twitter.com/@${userTwitter}`} target="_blank" rel="noreferrer">
+                        {userTwitter}
+                    </a>
+                </div>
+            )}
+
+            {urlPortfolio && (
+                <div>
+                    Portfolio:{' '}
+                    <a href={urlPortfolio} target="_blank" rel="noreferrer">
+                        {urlPortfolio}
+                    </a>
+                </div>
+            )}
         </div>
     )
 }
