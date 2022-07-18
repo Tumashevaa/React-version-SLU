@@ -30,8 +30,8 @@ function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, 
 
     return (
         <div className="mosaic-item">
-            <div className='additirial-info hide'>
-            </div>
+            {/* <div className='additirial-info hide'>
+            </div> */}
             <a data-img href={imgFullUrl} data-pswp-width={imgWidth} data-pswp-height={imgHeight} title={description} target="_blank" rel="noreferrer">
                 <img className="mosaic-img" src={imgSmallUrl} alt=""/>
             </a>

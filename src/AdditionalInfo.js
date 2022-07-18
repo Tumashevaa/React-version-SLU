@@ -20,7 +20,7 @@ function formatDateTime(dateCreatedAt) {
 function GetObjectPropertyValues({label, way}) {
     if (way) {
         return (
-            <div  className='additionalInfo'>{label}: {way}</div>
+            <div>{label}: {way}</div>
         )
     }
     return null 
