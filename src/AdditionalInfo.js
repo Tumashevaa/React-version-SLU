@@ -46,7 +46,7 @@ function BtnInAdditionalInfo(props) {
                 <button
                     onClick={openInfo}
                     disabled={isInfoLoading}
-                    className='btnItemById'
+                    className='AdditionalInfo-btnItemById'
                     title="Additirial info"
                 >
                     {isInfoLoading ? 'Loading' : 'Info' }
@@ -62,7 +62,7 @@ function BtnInAdditionalInfo(props) {
                     <GetObjectPropertyValues label="Focal length" way={data.exif.focal_length}/>
                     <GetObjectPropertyValues label="Country" way={data.location.country}/>
                     <GetObjectPropertyValues label="City" way={data.location.city}/>
-                    <button onClick={() => setModeBtn(false)} className='btnItemById'>Esc</button>
+                    <button onClick={() => setModeBtn(false)} className='AdditionalInfo-btnItemById'>Esc</button>
                 </React.Fragment>
             }
         </div>

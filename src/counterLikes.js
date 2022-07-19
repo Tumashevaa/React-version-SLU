@@ -3,7 +3,7 @@ import './CounterLikes.css'
 
 function SvgLike() {
     return (
-        <svg className='svg-like' viewBox="0 0 32 32" version="1.1" aria-hidden="false" fill="#767676">
+        <svg className='CounterLikes-svgLike' viewBox="0 0 32 32" version="1.1" aria-hidden="false" fill="#767676">
             <path d="M17.4 29c-.8.8-2 .8-2.8 0l-12.3-12.8c-3.1-3.1-3.1-8.2 0-11.4 3.1-3.1 8.2-3.1 11.3 0l2.4 2.8 2.3-2.8c3.1-3.1 8.2-3.1 11.3 0 3.1 3.1 3.1 8.2 0 11.4l-12.2 12.8z"></path>
         </svg>
     )
@@ -21,13 +21,13 @@ function CounterLikes(props) {
     const [likesCount, setLikesCount] = useState(props.likes)
     const [isLiked, setIsLiked] = useState(false)
 
-    let btnClass = 'btn-like'
+    let btnClass = 'CounterLikes-btnLike'
     if (isLiked) {
         btnClass = `${btnClass} on`
     }
     
     return (
-        <div className="mosaic-infoTop mosaic-text">
+        <div className="CounterLikes-viewBox text-decoration">
             <BtnLike
                 className={btnClass}
                 onClick={() => {

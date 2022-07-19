@@ -3,11 +3,11 @@ import './Navigation.css';
 
 function Navigation(props) {
   return (
-    <header className="App-header">
-      <nav className='App-nav'>
+    <header className="Navigation-header">
+      <nav className='Navigation'>
         <LogoSvg />
-        <div className="space"></div>
-        <p className="siteName">
+        <div className="Navigation-space"></div>
+        <p className="Navigation-siteName">
         {props.siteName}
         </p>
       </nav>

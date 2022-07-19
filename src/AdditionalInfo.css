@@ -1,4 +1,4 @@
-.btnItemById {
+.AdditionalInfo-btnItemById {
     position: absolute;
     left: auto;
     right: 20px;
@@ -18,7 +18,7 @@
     padding: 0 7px;
 }
   
-.btnItemById:hover{
+.AdditionalInfo-btnItemById:hover{
     color: #111;
     border-color: #111;
 }

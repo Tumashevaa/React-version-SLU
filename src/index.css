@@ -15,7 +15,7 @@ body {
   font-weight: 400;
 }
 
-.mosaic-text {
+.text-decoration {
   text-decoration: none;
   text-shadow: 0 1px 8px #0000001a;
   will-change: opacity;

@@ -29,15 +29,15 @@ function MosaicItem({ imgFullUrl, imgWidth, imgHeight, imgSmallUrl, likesCount, 
     }, []);
 
     return (
-        <div className="mosaic-item">
+        <div className="ContainerMosaicWrapper-item">
             <a data-img href={imgFullUrl} data-pswp-width={imgWidth} data-pswp-height={imgHeight} title={description} target="_blank" rel="noreferrer">
-                <img className="mosaic-img" src={imgSmallUrl} alt=""/>
+                <img className="ContainerMosaicWrapper-img" src={imgSmallUrl} alt=""/>
             </a>
             
             <CounterLikes likes={likesCount}/>
-            <div className="mosaic-infoBottom mosaic-text">
-                <a className="avatar-name" href={`https://unsplash.com/@${userName}`} target="_blank" rel="noreferrer">
-                    <img className='mosaic-avatar' title={bioHtml} src={userPic} alt="" />
+            <div className="ContainerMosaicWrapper-infoBottom text-decoration">
+                <a className="ContainerMosaicWrapper-avatarName" href={`https://unsplash.com/@${userName}`} target="_blank" rel="noreferrer">
+                    <img className='ContainerMosaicWrapper-avatar' title={bioHtml} src={userPic} alt="" />
                     {userName}
                 </a>
                <SocialBlock userInsta={userInsta} userTwitter={userTwitter} urlPortfolio={urlPortfolio}/>
@@ -102,8 +102,8 @@ function ContainerMosaicWrapper() {
     }
 
     return (
-        <div className="container" data-wrapper>
-            <div className="mosaic-wrapper">
+        <div className="ContainerMosaicWrapper-container" data-wrapper>
+            <div className="ContainerMosaicWrapper-mosaicWrapper">
 
                 <div>
                     {columnsEls[0]}
@@ -119,7 +119,7 @@ function ContainerMosaicWrapper() {
 
             </div>
 
-            <div className="container-btn">
+            <div className="ContainerMosaicWrapper-containerBtn">
                 <button onClick={handleButtonClick}>Show more photos</button>
             </div>
         </div>

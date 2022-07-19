@@ -1,4 +1,4 @@
-.btn-like {
+.CounterLikes-btnLike {
     background-color: #fff;
     color: #767676;
     fill: currentColor;
@@ -10,12 +10,12 @@
     padding: 7px 11px;
 }
   
-.btn-like:hover {
+.CounterLikes-btnLike:hover {
     color: #111;
     border-color:#111;
 }
   
-.btn-like:hover .svg-like {
+.CounterLikes-btnLike:hover .CounterLikes-svgLike {
     fill: #111;
 }
   
@@ -24,17 +24,17 @@
     border-color: #e04c4c;
 }
   
-.on .svg-like {
+.on .CounterLikes-svgLike {
     fill: white;
 }
   
-.svg-like {
+.CounterLikes-svgLike {
     position: relative;
     width: 15px;
     vertical-align: middle;
 }
 
-.mosaic-infoTop {
+.CounterLikes-viewBox {
     display: none;
     flex-direction: column;
     align-items: flex-end;
@@ -45,6 +45,6 @@
     padding: 20px;
 }
 
-.mosaic-item:hover .mosaic-infoTop {
+.ContainerMosaicWrapper-item:hover .CounterLikes-viewBox {
     display: flex;
 }
