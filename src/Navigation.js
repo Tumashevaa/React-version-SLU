@@ -1,26 +1,5 @@
-import LogoSvg from './logo.jsx'
+import LogoSvg from './Logo.jsx'
 import './Navigation.css';
-
-// import { slide as Menu } from 'react-burger-menu'
-// import React, { useState } from 'react'
-
-// class Example extends React.Component {
-//   showSettings (event) {
-//     event.preventDefault();
-//   }
-
-//   render () {
-//     // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
-//     return (
-//       <Menu>
-//         <a id="home" className="menu-item" href="/">Home</a>
-//         <a id="about" className="menu-item" href="/about">About</a>
-//         <a id="contact" className="menu-item" href="/contact">Contact</a>
-//         <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
-//       </Menu>
-//     );
-//   }
-// }
 
 function Navigation(props) {
   return (
@@ -31,7 +10,6 @@ function Navigation(props) {
         <p className="siteName">
         {props.siteName}
         </p>
-        {/* <Example /> */}
       </nav>
     </header>
   )
