@@ -27,7 +27,7 @@ function GetObjectPropertyValues({label, way}) {
 }
 
 function BtnInAdditionalInfo(props) {
-    const [modeBtn, setModeBtn] = useState(false)
+    const [showAdditionalInfo, setShowAdditionalInfo] = useState(false)
     const [data, setData] = useState({})
     const [isInfoLoading, setInfoLoading] = useState(false)
 
@@ -35,14 +35,14 @@ function BtnInAdditionalInfo(props) {
         setInfoLoading(true)
         getPhotosById(props.id).then((data) => {
             setData(data)
-            setModeBtn(true)
+            setShowAdditionalInfo(true)
             setInfoLoading(false)
         }) 
     }
 
     return (
         <div>
-            { !modeBtn &&
+            { !showAdditionalInfo &&
                 <button
                     onClick={openInfo}
                     disabled={isInfoLoading}
@@ -52,7 +52,7 @@ function BtnInAdditionalInfo(props) {
                     {isInfoLoading ? 'Loading' : 'Info' }
                 </button>
             }
-            { modeBtn &&
+            { showAdditionalInfo &&
                 <React.Fragment>
                     <GetObjectPropertyValues label="Date" way={formatDateTime(data.created_at)}/>
                     <GetObjectPropertyValues label="Camera" way={data.exif.make}/>
@@ -62,7 +62,7 @@ function BtnInAdditionalInfo(props) {
                     <GetObjectPropertyValues label="Focal length" way={data.exif.focal_length}/>
                     <GetObjectPropertyValues label="Country" way={data.location.country}/>
                     <GetObjectPropertyValues label="City" way={data.location.city}/>
-                    <button onClick={() => setModeBtn(false)} className='AdditionalInfo-btnItemById'>Esc</button>
+                    <button onClick={() => setShowAdditionalInfo(false)} className='AdditionalInfo-btnItemById'>Esc</button>
                 </React.Fragment>
             }
         </div>
