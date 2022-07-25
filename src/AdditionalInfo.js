@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Children, useState } from 'react'
 import './AdditionalInfo.css'
 
 function getPhotosById(id) {
@@ -17,10 +17,10 @@ function formatDateTime(dateCreatedAt) {
     return `${dateAt} ${monthsMap[monthAt]} ${yearAt} ${hourAt}:${minutesAt}`
 }
 
-function GetObjectPropertyValues({label, way}) {
-    if (way) {
+function InfoRow({title, children}) {
+    if (children) {
         return (
-            <div>{label}: {way}</div>
+            <div>{title}: {children}</div>
         )
     }
     return null 
@@ -54,14 +54,14 @@ function BtnInAdditionalInfo(props) {
             }
             { showAdditionalInfo &&
                 <React.Fragment>
-                    <GetObjectPropertyValues label="Date" way={formatDateTime(data.created_at)}/>
-                    <GetObjectPropertyValues label="Camera" way={data.exif.make}/>
-                    <GetObjectPropertyValues label="ISO" way={data.exif.iso}/>
-                    <GetObjectPropertyValues label="Aperture" way={data.exif.aperture}/>
-                    <GetObjectPropertyValues label="Exposure time" way={data.exif.exposure_time}/>
-                    <GetObjectPropertyValues label="Focal length" way={data.exif.focal_length}/>
-                    <GetObjectPropertyValues label="Country" way={data.location.country}/>
-                    <GetObjectPropertyValues label="City" way={data.location.city}/>
+                    <InfoRow title="Date">{formatDateTime(data.created_at)}</InfoRow>
+                    <InfoRow title="Camera">{data.exif.make}</InfoRow>
+                    <InfoRow title="ISO">{data.exif.iso}</InfoRow>
+                    <InfoRow title="Aperture">{data.exif.aperture}</InfoRow>
+                    <InfoRow title="Exposure time">{data.exif.exposure_time}</InfoRow>
+                    <InfoRow title="Focal length">{data.exif.focal_length}</InfoRow>
+                    <InfoRow title="Country">{data.location.country}</InfoRow>
+                    <InfoRow title="City">{data.location.city}</InfoRow>
                     <button onClick={() => setShowAdditionalInfo(false)} className='AdditionalInfo-btnItemById'>Esc</button>
                 </React.Fragment>
             }
