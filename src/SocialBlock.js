@@ -1,34 +1,67 @@
-import './SocialBlock.css'
+import "./SocialBlock.css";
+
+function SocialBlock({ userInsta, userTwitter, urlPortfolio }) {
+  return (
+    <div>
+      {userInsta && (
+        <StringToSocialBlock
+          url={`https://instagram.com/@${userInsta}`}
+          title={"Instagram"}
+          userName={userInsta}
+        >
+          {userInsta}
+        </StringToSocialBlock>
+      )}
+      {userTwitter && (
+        <StringToSocialBlock
+          url={`https://twitter.com/@${userTwitter}`}
+          title={"Twitter"}
+          userName={userTwitter}
+        >
+          {userTwitter}
+        </StringToSocialBlock>
+      )}
+      {urlPortfolio && (
+        <StringToSocialBlock
+          url={urlPortfolio}
+          title={"Profile"}
+          userName={urlPortfolio}
+        >
+          {urlPortfolio}
+        </StringToSocialBlock>
+      )}
+    </div>
+  );
+}
+
+function StringToSocialBlock({ url, userName, title }) {
+  return (
+    <div className="social">
+      <a href={url} target="_blank" rel="noreferrer">
+        {title}: {userName}
+      </a>
+    </div>
+  );
+}
 
 // function SocialBlock({userInsta, userTwitter, urlPortfolio}) {
 //     return (
-//             {userInsta && <SocialBlock url={`https://instagram.com/@${userInsta}`}>@{userInsta}</SocialBlock>}
-//             {userTwitter && <SocialBlock url={`https://twitter.com/@${userTwitter}`}>@{userTwitter}</SocialBlock>}
-//             {urlPortfolio && <SocialBlock url={urlPortfolio}>{urlPortfolio}</SocialBlock>}
+//         <div className="social">
+//             <div>
+//                 {userInsta &&
+//                 <a href={`https://instagram.com/@${userInsta}`} target="_blank" rel="noreferrer">Instagram: @{userInsta}</a>}
+//             </div>
+//             <div>
+//                 {userTwitter &&
+//                 <a href={`https://twitter.com/@${userTwitter}`} target="_blank" rel="noreferrer">Twitter: @{userTwitter}</a>}
+//             </div>
+//             <div>
+//                 {urlPortfolio &&
+//                 <a href={urlPortfolio} target="_blank" rel="noreferrer">Portfolio: {urlPortfolio}</a>}
+//             </div>
 //         </div>
 //     )
 // }
-
-
-function SocialBlock({userInsta, userTwitter, urlPortfolio}) {
-    return (
-        <div className="social"> 
-            <div>
-                {userInsta && 
-                <a href={`https://instagram.com/@${userInsta}`} target="_blank" rel="noreferrer">Instagram: @{userInsta}</a>}
-            </div>
-            <div>
-                {userTwitter && 
-                <a href={`https://twitter.com/@${userTwitter}`} target="_blank" rel="noreferrer">Twitter: @{userTwitter}</a>}
-            </div>
-            <div>
-                {urlPortfolio && 
-                <a href={urlPortfolio} target="_blank" rel="noreferrer">Portfolio: {urlPortfolio}</a>}
-            </div>
-        </div>
-    )
-}
-
 
 // function SocialBlock({userInsta, userTwitter, urlPortfolio}) {
 //     return (
@@ -39,9 +72,9 @@ function SocialBlock({userInsta, userTwitter, urlPortfolio}) {
 //                     <a href={`https://instagram.com/@${userInsta}`} target="_blank" rel="noreferrer">
 //                         {userInsta}
 //                     </a>
-//                 </div>  
+//                 </div>
 //             )}
-            
+
 //             {userTwitter && (
 //                 <div>
 //                     Twitter:{' '}
@@ -63,4 +96,4 @@ function SocialBlock({userInsta, userTwitter, urlPortfolio}) {
 //     )
 // }
 
-export default SocialBlock
+export default SocialBlock;
