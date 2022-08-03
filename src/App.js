@@ -1,12 +1,10 @@
-import Navigation from './Navigation'
-import ContainerMosaicWrapper from './ContainerMosaicWrapper'
-
-
+import Navigation from "./Navigation";
+import ContainerMosaicWrapper from "./containerMosaicWrapper";
 
 function App() {
   return (
     <div>
-        <Navigation siteName="Unssssssssplash!"/>
+      <Navigation siteName="Unssssssssplash!" />
       <ContainerMosaicWrapper />
     </div>
   );
