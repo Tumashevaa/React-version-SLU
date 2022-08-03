@@ -21,15 +21,7 @@ function SocialBlock({ userInsta, userTwitter, urlPortfolio }) {
           {userTwitter}
         </StringToSocialBlock>
       )}
-      {urlPortfolio && (
-        <StringToSocialBlock
-          url={urlPortfolio}
-          title={"Profile"}
-          userName={urlPortfolio}
-        >
-          {urlPortfolio}
-        </StringToSocialBlock>
-      )}
+      {urlPortfolio && <div url={urlPortfolio}>Profile: {urlPortfolio}</div>}
     </div>
   );
 }
@@ -38,7 +30,7 @@ function StringToSocialBlock({ url, userName, title }) {
   return (
     <div className="social">
       <a href={url} target="_blank" rel="noreferrer">
-        {title}: {userName}
+        {title}: @{userName}
       </a>
     </div>
   );
