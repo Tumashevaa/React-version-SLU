@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BtnInAdditionalInfo from "./AdditionalInfo.js";
-import CounterLikes from "./counterLikes.js";
+import CounterLikes from "./CounterLikes.js";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 import "./ContainerMosaicWrapper.css";
