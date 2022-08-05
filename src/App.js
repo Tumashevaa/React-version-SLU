@@ -1,5 +1,5 @@
 import Navigation from "./Navigation";
-import ContainerMosaicWrapper from "./ContainerMosaicWrapper";
+import ContainerMosaicWrapper from "./containerMosaicWrapper.js";
 
 function App() {
   return (
