@@ -8,12 +8,6 @@ import SocialBlock from "./SocialBlock.js";
 
 const COLUMNS = 3;
 
-function getPhotos(page) {
-  return fetch(
-    `https://api.unsplash.com/photos/?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE&page=${page}`
-  ).then((response) => response.json());
-}
-
 function MosaicItem({
   imgFullUrl,
   imgWidth,
@@ -87,13 +81,24 @@ function MosaicItem({
   );
 }
 
+function getPhotos(page) {
+  return fetch(
+    `https://api.unsplash.com/photos/?client_id=ptJ9sMq465MLUNnrewrag_75WkMawAuAFrdyxSeK_EE&page=${page}`
+  ).then((response) => response.json());
+}
+
 function ContainerMosaicWrapper() {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getPhotos(page).then((data) => {
-      console.log(data);
+    let pageFromHash = null;
+    if (document.location.hash.length > 0) {
+      pageFromHash = parseInt(document.location.hash.replace("#page-", ""), 10);
+      setPage(pageFromHash);
+    }
+
+    getPhotos(pageFromHash ? pageFromHash : page).then((data) => {
       setItems(data);
     });
   }, []);
@@ -101,6 +106,8 @@ function ContainerMosaicWrapper() {
   const handleButtonClick = () => {
     const newPage = page + 1;
     setPage(newPage);
+    document.location.hash = `page-${newPage}`;
+
     getPhotos(newPage).then((nextData) => {
       const newData = [...items, ...nextData];
       console.log(newData);
@@ -148,7 +155,9 @@ function ContainerMosaicWrapper() {
       </div>
 
       <div className="ContainerMosaicWrapper-containerBtn">
-        <button onClick={handleButtonClick}>Show more photos</button>
+        <button onClick={handleButtonClick}>
+          Show more photos (page #{page + 1})
+        </button>
       </div>
     </div>
   );
